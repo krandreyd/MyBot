@@ -1,13 +1,22 @@
 package bot;
 
+import bot.calendar.CalendarUtil;
+import bot.calendar.model.KeyboardButton;
 import jdk.nashorn.internal.runtime.regexp.joni.Regex;
+import org.joda.time.LocalDate;
 import org.telegram.telegrambots.ApiContextInitializer;
 import org.telegram.telegrambots.TelegramBotsApi;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
+import org.telegram.telegrambots.api.objects.CallbackQuery;
 import org.telegram.telegrambots.api.objects.Message;
 import org.telegram.telegrambots.api.objects.Update;
+import org.telegram.telegrambots.api.objects.replykeyboard.ReplyKeyboardMarkup;
+import org.telegram.telegrambots.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.*;
 
 public class Bot extends TelegramLongPollingBot {
@@ -36,6 +45,8 @@ public class Bot extends TelegramLongPollingBot {
 
 
 
+
+
         /*
         while(m.find()) {
             System.out.println(txt.substring(m.start(), m.end()) + "");
@@ -57,6 +68,20 @@ public class Bot extends TelegramLongPollingBot {
             }
             case "/start": {
                 sendMsg(msg, "Слава Украине!");
+                break;
+            }
+            case "/calendar": {
+                CalendarUtil calendar  = new CalendarUtil();
+                KeyboardButton keyboardButton = new KeyboardButton();
+                ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
+                replyKeyboardMarkup.setSelective(true);
+                replyKeyboardMarkup.setResizeKeyboard(true);
+                replyKeyboardMarkup.setOneTimeKeyboard(true);
+                keyboardButton.setText(calendar.generateKeyboard(LocalDate.now()));
+
+              //  replyKeyboardMarkup.setKeyboard(calendar.generateKeyboard(LocalDate.now()));
+                sendMsg(msg,"]eq");
+
                 break;
             }
            /* case "Слава": {
@@ -87,6 +112,9 @@ public class Bot extends TelegramLongPollingBot {
         SendMessage s = new SendMessage();
         s.setChatId(msg.getChatId()); // Боту может писать не один человек, и поэтому чтобы отправить сообщение, грубо говоря нужно узнать куда его отправлять
         s.setText(text);
+
+
+
         try { //Чтобы не крашнулась программа при вылете Exception
             sendMessage(s);
         } catch (TelegramApiException e){
