@@ -7,7 +7,20 @@
     <groupId>MyBot</groupId>
     <artifactId>MyBot</artifactId>
     <version>1.0-SNAPSHOT</version>
+
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+
 <dependencies>
+
+    <dependency>
+        <groupId>com.github.YegorB</groupId>
+        <artifactId>tbot-calendar</artifactId>
+    </dependency>
 
     <dependency>
         <groupId>com.google.code.gson</groupId>
@@ -20,6 +33,20 @@
         <groupId>joda-time</groupId>
         <artifactId>joda-time</artifactId>
         <version>2.9.9</version>
+    </dependency>
+
+    <!-- WEATHER API  https://github.com/fedy2/yahoo-weather-java-api -->
+    <dependency>
+        <groupId>com.github.fedy2</groupId>
+        <artifactId>yahoo-weather-java-api</artifactId>
+        <version>2.0.2</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+    <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>1.7.25</version>
     </dependency>
 </dependencies>
     <!-- maven-compiler-plugin -->
