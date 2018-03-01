@@ -14,15 +14,18 @@ import org.json.JSONStringer;
 import org.telegram.telegrambots.ApiContextInitializer;
 import org.telegram.telegrambots.TelegramBotsApi;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
+import org.telegram.telegrambots.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.api.objects.CallbackQuery;
 import org.telegram.telegrambots.api.objects.Message;
 import org.telegram.telegrambots.api.objects.Update;
+import org.telegram.telegrambots.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.api.objects.replykeyboard.ReplyKeyboard;
 import org.telegram.telegrambots.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.api.objects.replykeyboard.ReplyKeyboardRemove;
 import org.telegram.telegrambots.api.objects.replykeyboard.buttons.*;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
+import org.telegram.telegrambots.api.methods.send.SendMessage;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
@@ -30,6 +33,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.*;
+
+import static java.lang.Math.toIntExact;
 
 public class Bot extends TelegramLongPollingBot {
 
@@ -52,11 +57,12 @@ public class Bot extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update e) {
-        Message msg = e.getMessage(); // Это нам понадобится
-        String txt = msg.getText();
-        System.out.println(txt);
-        txt = grammarChecker(txt);
-        System.out.println(txt);
+        if (e.hasMessage() && e.getMessage().hasText()) {
+            Message msg = e.getMessage(); // Это нам понадобится
+            String txt = msg.getText();
+            System.out.println(txt);
+            txt = grammarChecker(txt);
+            System.out.println(txt);
 
 
 
@@ -67,71 +73,100 @@ public class Bot extends TelegramLongPollingBot {
             System.out.println(txt.substring(m.start(), m.end()) + "");
             System.out.println(txt);
         }*/
-        switch (txt){
+            switch (txt) {
 
-            case "слава украине": {
-            sendMsg(msg, "Героям Слава!");
-            break;
-        }
-            case "слава": {
-            sendMsg(msg, "Украине!");
-            break;
-            }
-            case "рыжий": {
-                sendMsg(msg, "Наш Президент!");
-                break;
-            }
-            case "/start": {
-                sendMsg(msg, "Слава Украине!");
-                break;
-            }
-            case "/calendar": {
-                CalendarUtil calendar  = new CalendarUtil();
-                KeyboardButton keyboardButton = new KeyboardButton();
-                ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
-                replyKeyboardMarkup.setSelective(true);
-                replyKeyboardMarkup.setResizeKeyboard(true);
-                replyKeyboardMarkup.setOneTimeKeyboard(true);
-                keyboardButton.setText(calendar.generateKeyboard(LocalDate.now()));
-
-              //  replyKeyboardMarkup.setKeyboard(calendar.generateKeyboard(LocalDate.now()));
-                JSONObject jsonObject = new JSONObject();
-
-                calendar.generateKeyboard(LocalDate.now());
-                System.out.println(calendar.generateKeyboard(LocalDate.now()));
-                sendMsg(msg,"йцукйцук");
-
-
-                break;
-            }
-            case "погода": {
-
-                YahooWeatherService service = null;
-                try {
-                    service = new YahooWeatherService();
-                } catch (JAXBException e1) {
-                    e1.printStackTrace();
+                case "слава украине": {
+                    sendMsg(msg, "Героям Слава!");
+                    break;
                 }
-                Channel channel = null;
-                try {
-                    channel = service.getForecast("2460286", DegreeUnit.CELSIUS);
-                } catch (JAXBException e1) {
-                    e1.printStackTrace();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
+                case "слава": {
+                    sendMsg(msg, "Украине!");
+                    break;
                 }
-                System.out.println(channel.getWind());
-              sendMsg(msg, channel.getTitle());
-                break;
-            }
-            default: sendMsg(msg, "Я пока не знаю что ответить");
+                case "рыжий": {
+                    sendMsg(msg, "Наш Президент!");
+                    break;
+                }
+                case "/start": {
+                    sendMsg(msg, "Слава Украине!");
+                    break;
+                }
+                case "/calendar": {
+                    CalendarUtil calendar = new CalendarUtil();
+                    KeyboardButton keyboardButton = new KeyboardButton();
+                    long chat_id = e.getMessage().getChatId();
+                    ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
+                    replyKeyboardMarkup.setSelective(true);
+                    replyKeyboardMarkup.setResizeKeyboard(true);
+                    replyKeyboardMarkup.setOneTimeKeyboard(true);
+                    SendMessage message = new SendMessage()
+                            .setChatId(chat_id)
+                            .setText("You send /calendar");
+                    InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+
+                    //  replyKeyboardMarkup.setKeyboard(calendar.generateKeyboard(LocalDate.now()));
+                    JSONObject jsonObject = new JSONObject();
+                    inlineKeyboardMarkup.setKeyboard(calendar.generateKeyboard(LocalDate.now()));
+                    message.setReplyMarkup(inlineKeyboardMarkup);
+                    try {
+                        sendMessage(message);
+                    } catch (TelegramApiException e1) {
+                        e1.printStackTrace();
+                    }
+                    calendar.generateKeyboard(LocalDate.now());
+                    System.out.println(calendar.generateKeyboard(LocalDate.now()));
+
+
+                    break;
+                }
+                case "погода": {
+
+                    YahooWeatherService service = null;
+                    try {
+                        service = new YahooWeatherService();
+                    } catch (JAXBException e1) {
+                        e1.printStackTrace();
+                    }
+                    Channel channel = null;
+                    try {
+                        channel = service.getForecast("2460286", DegreeUnit.CELSIUS);
+                    } catch (JAXBException e1) {
+                        e1.printStackTrace();
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+                    System.out.println(channel.getWind());
+                    sendMsg(msg, channel.getTitle());
+                    break;
+                }
+                default:
+                    sendMsg(msg, "Я пока не знаю что ответить");
             }
            /* case "Слава": {
                 sendMsg(msg, "");
                 break;
             }*/
 
+        } else if (e.hasCallbackQuery()) {
+            // Set variables
+            String call_data = e.getCallbackQuery().getData();
+            long message_id = e.getCallbackQuery().getMessage().getMessageId();
+            long chat_id = e.getCallbackQuery().getMessage().getChatId();
+            System.out.println( call_data);
+            if (call_data.equals("update_msg_text")) {
+                String answer = "Updated message text";
+                EditMessageText new_message = new EditMessageText()
+                        .setChatId(chat_id)
+                        .setMessageId(toIntExact(message_id))
+                        .setText(answer);
+                try {
+                    editMessageText(new_message);
+                } catch (TelegramApiException a) {
+                    a.printStackTrace();
+                }
+            }
         }
+    }
      /*   if (txt.equals("Слава Украине"||"слава украине"||"Слава украине")){
             sendMsg(msg, "Героям Слава!");
         // Тут будет то, что выполняется при получении сообщения
