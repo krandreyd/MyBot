@@ -14,7 +14,7 @@ public class CalendarUtil {
 
     public static final String IGNORE = "ignore!@#$%^&";
 
-    public static final String[] WD = {"M", "T", "W", "T", "F", "S", "S"};
+    public static final String[] WD = {"П", "В", "С", "Ч", "П", "С", "В"};
 
     public List<List<InlineKeyboardButton>> generateKeyboard(LocalDate date) {
 
