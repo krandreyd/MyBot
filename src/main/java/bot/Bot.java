@@ -3,6 +3,7 @@ package bot;
 import bot.calendar.CalendarUtil;
 
 
+import bot.config.Config;
 import com.github.fedy2.weather.YahooWeatherService;
 import com.github.fedy2.weather.data.Channel;
 import com.github.fedy2.weather.data.Forecast;
@@ -40,20 +41,7 @@ public class Bot extends TelegramLongPollingBot {
 
     private static final String WEATHER_FOR_NOW = "☂ Погода сейчас";
 
-    public static void main(String[] args) {
-        ApiContextInitializer.init(); // Инициализируем апи
-        TelegramBotsApi botapi = new TelegramBotsApi();
-        try {
-            botapi.registerBot(new Bot());
-        } catch (TelegramApiException e) {
-            e.printStackTrace();
-        }
-    }
-    @Override
-    public String getBotUsername() {
-        return "USER";
-        //возвращаем юзера
-    }
+
 
     @Override
     public void onUpdateReceived(Update e) {
@@ -93,24 +81,16 @@ public class Bot extends TelegramLongPollingBot {
                 }
                 case "/calendar": {
                     CalendarUtil calendar = new CalendarUtil();
-                    KeyboardButton keyboardButton = new KeyboardButton();
                     long chat_id = e.getMessage().getChatId();
-                    ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
-                    replyKeyboardMarkup.setSelective(true);
-                    replyKeyboardMarkup.setResizeKeyboard(true);
-                    replyKeyboardMarkup.setOneTimeKeyboard(true);
                     SendMessage message = new SendMessage()
                             .setChatId(chat_id)
                             .setText("You send /calendar");
                     InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
-
-                    //  replyKeyboardMarkup.setKeyboard(calendar.generateKeyboard(LocalDate.now()));
-                    JSONObject jsonObject = new JSONObject();
                     inlineKeyboardMarkup.setKeyboard(calendar.generateKeyboard(LocalDate.now()));
                     System.out.println(LocalDate.now());
                     message.setReplyMarkup(inlineKeyboardMarkup);
                     try {
-                        sendMessage(message);
+                        execute(message);
                     } catch (TelegramApiException e1) {
                         e1.printStackTrace();
                     }
@@ -171,7 +151,7 @@ public class Bot extends TelegramLongPollingBot {
 
 
                 try {
-                    editMessageText(new_message);
+                    execute(new_message);
                 } catch (TelegramApiException a) {
                     a.printStackTrace();
                 }
@@ -211,8 +191,14 @@ public class Bot extends TelegramLongPollingBot {
     }
     @Override
     public String getBotToken() {
-        return "522352820:AAFw-EuHQeBlLIYYB0CJjNKkCHGYs0Hvaik";
+        return Config.BOT_TOKEN;
         //Токен бота
+    }
+
+    @Override
+    public String getBotUsername() {
+        return Config.BOT_NAME;
+        //возвращаем юзера
     }
 
     public String grammarChecker(String txt){
