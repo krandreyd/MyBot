@@ -43,10 +43,23 @@
       <file leaf-file-name="CalendarUtil.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/bot/calendar/CalendarUtil.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="71" lean-forward="false" selection-start-line="16" selection-start-column="71" selection-end-line="16" selection-end-column="71" />
+            <state relative-caret-position="442">
+              <caret line="26" column="31" lean-forward="true" selection-start-line="26" selection-start-column="31" selection-end-line="26" selection-end-column="31" />
               <folding>
                 <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SimpleDateFormat.java" pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/text/SimpleDateFormat.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="109">
+              <caret line="579" column="59" lean-forward="false" selection-start-line="579" selection-start-column="59" selection-end-line="579" selection-end-column="59" />
+              <folding>
+                <element signature="e#23443#23444#0" expanded="true" />
+                <element signature="e#23515#23516#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -398,7 +411,7 @@
       <workItem from="1519824997421" duration="2347000" />
       <workItem from="1519905705880" duration="8417000" />
       <workItem from="1519983681484" duration="1166000" />
-      <workItem from="1519985064917" duration="2729000" />
+      <workItem from="1519985064917" duration="3167000" />
     </task>
     <task id="LOCAL-00001" summary="added calendar but not full">
       <created>1519817675096</created>
@@ -421,11 +434,18 @@
       <option name="project" value="LOCAL" />
       <updated>1519987215109</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="day of week changes">
+      <created>1519987824297</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1519987824297</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="46559000" />
+    <option name="totallyTimeSpent" value="46997000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -512,7 +532,8 @@
     <MESSAGE value="added calendar but not full" />
     <MESSAGE value="weather api + updated KeyboardButton class" />
     <MESSAGE value="jar compiler + tg library into pom + small fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="jar compiler + tg library into pom + small fixes" />
+    <MESSAGE value="day of week changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="day of week changes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -525,17 +546,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/bot/calendar/CalendarUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
-          <caret line="52" column="41" lean-forward="false" selection-start-line="52" selection-start-column="41" selection-end-line="52" selection-end-column="41" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/joda-time/joda-time/2.9.9/joda-time-2.9.9.jar!/org/joda/time/LocalDate.class" />
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="612">
@@ -664,7 +674,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/joda-time/joda-time/2.9.9/joda-time-2.9.9.jar!/org/joda/time/LocalDate.class" />
     <entry file="jar://$PROJECT_DIR$/../учеба 3 курс 2 сем/бот/telegrambots-3.6-jar-with-dependencies.jar!/org/telegram/telegrambots/api/methods/send/SendMessage.class" />
     <entry file="jar://$MAVEN_REPOSITORY$/com/github/fedy2/yahoo-weather-java-api/2.0.2/yahoo-weather-java-api-2.0.2.jar!/com/github/fedy2/weather/data/Channel.class" />
     <entry file="jar://$PROJECT_DIR$/../учеба 3 курс 2 сем/бот/telegrambots-3.6-jar-with-dependencies.jar!/org/telegram/telegrambots/api/objects/replykeyboard/ReplyKeyboardMarkup.class" />
@@ -736,10 +745,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/util/Locale.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="840">
+          <caret line="2312" column="8" lean-forward="false" selection-start-line="2312" selection-start-column="8" selection-end-line="2312" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/text/SimpleDateFormat.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="109">
+          <caret line="579" column="59" lean-forward="false" selection-start-line="579" selection-start-column="59" selection-end-line="579" selection-end-column="59" />
+          <folding>
+            <element signature="e#23443#23444#0" expanded="true" />
+            <element signature="e#23515#23516#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/joda-time/joda-time/2.9.9/joda-time-2.9.9.jar!/org/joda/time/LocalDate.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="381">
+          <caret line="361" column="49" lean-forward="false" selection-start-line="361" selection-start-column="49" selection-end-line="361" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/bot/calendar/CalendarUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="71" lean-forward="false" selection-start-line="16" selection-start-column="71" selection-end-line="16" selection-end-column="71" />
+        <state relative-caret-position="442">
+          <caret line="26" column="31" lean-forward="true" selection-start-line="26" selection-start-column="31" selection-end-line="26" selection-end-column="31" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
