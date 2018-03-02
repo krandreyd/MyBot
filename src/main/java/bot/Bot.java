@@ -107,6 +107,7 @@ public class Bot extends TelegramLongPollingBot {
                     //  replyKeyboardMarkup.setKeyboard(calendar.generateKeyboard(LocalDate.now()));
                     JSONObject jsonObject = new JSONObject();
                     inlineKeyboardMarkup.setKeyboard(calendar.generateKeyboard(LocalDate.now()));
+                    System.out.println(LocalDate.now());
                     message.setReplyMarkup(inlineKeyboardMarkup);
                     try {
                         sendMessage(message);
@@ -153,12 +154,22 @@ public class Bot extends TelegramLongPollingBot {
             long message_id = e.getCallbackQuery().getMessage().getMessageId();
             long chat_id = e.getCallbackQuery().getMessage().getChatId();
             System.out.println( call_data);
-            if (call_data.equals("update_msg_text")) {
-                String answer = "Updated message text";
+            if (call_data.equals(">")) {
+                SendMessage answer = new SendMessage();
+
+                InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+                CalendarUtil calendar = new CalendarUtil();
+                LocalDate today = new LocalDate();
+                LocalDate nextMonth = today.plusMonths(1).withDayOfMonth(1);
+                inlineKeyboardMarkup.setKeyboard(calendar.generateKeyboard(nextMonth));
+
                 EditMessageText new_message = new EditMessageText()
                         .setChatId(chat_id)
                         .setMessageId(toIntExact(message_id))
-                        .setText(answer);
+                        .setText("Следующий месяц");
+                new_message.setReplyMarkup(inlineKeyboardMarkup);
+
+
                 try {
                     editMessageText(new_message);
                 } catch (TelegramApiException a) {
