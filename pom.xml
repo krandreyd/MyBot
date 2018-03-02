@@ -284,6 +284,12 @@
 
 
         </plugins>
+
+        <resources>
+            <resource>
+                <directory>./config/</directory>
+            </resource>
+        </resources>
     </build>
 
 
