@@ -29,7 +29,7 @@
     <dependency>
         <groupId>org.telegram</groupId>
         <artifactId>telegrambots</artifactId>
-        <version>3.6</version>
+        <version>LATEST</version>
     </dependency>
 
     <dependency>
