@@ -66,7 +66,7 @@ public class Bot extends TelegramLongPollingBot {
                 }
 
             }
-            // ------------------------- КАЛЕНДАРЬ -----------------------------------
+ // ------------------------- КАЛЕНДАРЬ -----------------------------------
             else if (message_text.equals(MenuUtil.CALENDAR)){
                 SendMessage message = new SendMessage()
                         .setChatId(chat_id)
@@ -84,28 +84,39 @@ public class Bot extends TelegramLongPollingBot {
                 calendar.generateKeyboard(LocalDate.now());
                 System.out.println(calendar.generateKeyboard(LocalDate.now()));
             }
-            //TODO
-            // ------------------------- ПОГОДА -----------------------------------
+//TODO
+ // ------------------------- ПОГОДА -----------------------------------
             else if (message_text.equals(MenuUtil.WEATHER)){
                 SendMessage message = new SendMessage()
                         .setChatId(chat_id)
                         .setText(MenuUtil.WEATHER);
 
             }
-            //TODO
-            // ------------------------- ВИКТОРИНА -----------------------------------
+ //TODO
+ // ------------------------- ВИКТОРИНА -----------------------------------
             else if (message_text.equals(MenuUtil.QUIZ)){
                 SendMessage message = new SendMessage()
                         .setChatId(chat_id)
                         .setText(MenuUtil.QUIZ);
             }
-            //TODO
-            // ------------------------- ФОТО -----------------------------------
+ //TODO
+// ------------------------- ФОТО -----------------------------------
             else if (message_text.equals(MenuUtil.PHOTO)){
                 SendMessage message = new SendMessage()
                         .setChatId(chat_id)
                         .setText(MenuUtil.PHOTO);
 
+            }
+            else {
+                SendMessage message = new SendMessage() // Create a message object object
+                        .setChatId(chat_id)
+                        .setText(message_text);
+                message.setText("Я пока не знаю что ответить");
+                try{
+                    execute(message);
+                }   catch (TelegramApiException e){
+                    e.printStackTrace();
+                }
             }
         }
 
@@ -235,9 +246,6 @@ public class Bot extends TelegramLongPollingBot {
         SendMessage s = new SendMessage();
         s.setChatId(msg.getChatId()); // Боту может писать не один человек, и поэтому чтобы отправить сообщение, грубо говоря нужно узнать куда его отправлять
         s.setText(text);
-
-
-
         try { //Чтобы не крашнулась программа при вылете Exception
             sendMessage(s);
         } catch (TelegramApiException e){
