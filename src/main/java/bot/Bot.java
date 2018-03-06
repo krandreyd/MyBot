@@ -4,6 +4,7 @@ import bot.calendar.CalendarUtil;
 
 
 import bot.config.Config;
+import bot.replyMenu.MenuUtil;
 import com.github.fedy2.weather.YahooWeatherService;
 import com.github.fedy2.weather.data.Channel;
 import com.github.fedy2.weather.data.Forecast;
@@ -44,16 +45,69 @@ public class Bot extends TelegramLongPollingBot {
 
 
     @Override
-    public void onUpdateReceived(Update e) {
-        if (e.hasMessage() && e.getMessage().hasText()) {
-            Message msg = e.getMessage(); // Это нам понадобится
-            String txt = msg.getText();
-            System.out.println(txt);
-            txt = grammarChecker(txt);
-            System.out.println(txt);
+    public void onUpdateReceived(Update update) {
+        if (update.hasMessage() && update.getMessage().hasText()) {
+            String message_text  = update.getMessage().getText();
+            long chat_id = update.getMessage().getChatId();
+            System.out.println(message_text);
+//---------------------------/START/------------------------------------------------
+            if (message_text.equals("/start")) {
+                SendMessage message = new SendMessage() // Create a message object object
+                        .setChatId(chat_id)
+                        .setText(message_text);
+                ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
+                keyboardMarkup.setKeyboard(MenuUtil.generateMenu());
+                message.setReplyMarkup(keyboardMarkup);
+                message.setText("Выберите пункт меню");
+                try {
+                    execute(message); // Sending our message object to user
+                } catch (TelegramApiException e) {
+                    e.printStackTrace();
+                }
 
+            }
+            // ------------------------- КАЛЕНДАРЬ -----------------------------------
+            else if (message_text.equals(MenuUtil.CALENDAR)){
+                SendMessage message = new SendMessage()
+                        .setChatId(chat_id)
+                        .setText(MenuUtil.CALENDAR);
+                CalendarUtil calendar = new CalendarUtil();
+                InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+                inlineKeyboardMarkup.setKeyboard(calendar.generateKeyboard(LocalDate.now()));
+                System.out.println(LocalDate.now());
+                message.setReplyMarkup(inlineKeyboardMarkup);
+                try {
+                    execute(message);
+                } catch (TelegramApiException e) {
+                    e.printStackTrace();
+                }
+                calendar.generateKeyboard(LocalDate.now());
+                System.out.println(calendar.generateKeyboard(LocalDate.now()));
+            }
+            //TODO
+            // ------------------------- ПОГОДА -----------------------------------
+            else if (message_text.equals(MenuUtil.WEATHER)){
+                SendMessage message = new SendMessage()
+                        .setChatId(chat_id)
+                        .setText(MenuUtil.WEATHER);
 
+            }
+            //TODO
+            // ------------------------- ВИКТОРИНА -----------------------------------
+            else if (message_text.equals(MenuUtil.QUIZ)){
+                SendMessage message = new SendMessage()
+                        .setChatId(chat_id)
+                        .setText(MenuUtil.QUIZ);
+            }
+            //TODO
+            // ------------------------- ФОТО -----------------------------------
+            else if (message_text.equals(MenuUtil.PHOTO)){
+                SendMessage message = new SendMessage()
+                        .setChatId(chat_id)
+                        .setText(MenuUtil.PHOTO);
 
+            }
+        }
 
 
         /*
@@ -61,7 +115,7 @@ public class Bot extends TelegramLongPollingBot {
             System.out.println(txt.substring(m.start(), m.end()) + "");
             System.out.println(txt);
         }*/
-            switch (txt) {
+          /*  switch (txt) {
 
                 case "слава украине": {
                     sendMsg(msg, "Героям Слава!");
@@ -81,7 +135,7 @@ public class Bot extends TelegramLongPollingBot {
                 }
                 case "/calendar": {
                     CalendarUtil calendar = new CalendarUtil();
-                    long chat_id = e.getMessage().getChatId();
+                    long chat_id = update.getMessage().getChatId();
                     SendMessage message = new SendMessage()
                             .setChatId(chat_id)
                             .setText("You send /calendar");
@@ -128,11 +182,12 @@ public class Bot extends TelegramLongPollingBot {
                 break;
             }*/
 
-        } else if (e.hasCallbackQuery()) {
+        //TODO
+         else if (update.hasCallbackQuery()) {
             // Set variables
-            String call_data = e.getCallbackQuery().getData();
-            long message_id = e.getCallbackQuery().getMessage().getMessageId();
-            long chat_id = e.getCallbackQuery().getMessage().getChatId();
+            String call_data = update.getCallbackQuery().getData();
+            long message_id = update.getCallbackQuery().getMessage().getMessageId();
+            long chat_id = update.getCallbackQuery().getMessage().getChatId();
             System.out.println( call_data);
             if (call_data.equals(">")) {
                 SendMessage answer = new SendMessage();
