@@ -84,7 +84,7 @@ public class Bot extends TelegramLongPollingBot {
                 calendar.generateKeyboard(LocalDate.now());
                 System.out.println(calendar.generateKeyboard(LocalDate.now()));
             }
-//TODO
+//TODO make weather feature
  // ------------------------- ПОГОДА -----------------------------------
             else if (message_text.equals(MenuUtil.WEATHER)){
                 SendMessage message = new SendMessage()
@@ -92,14 +92,14 @@ public class Bot extends TelegramLongPollingBot {
                         .setText(MenuUtil.WEATHER);
 
             }
- //TODO
+ //TODO Make quiz
  // ------------------------- ВИКТОРИНА -----------------------------------
             else if (message_text.equals(MenuUtil.QUIZ)){
                 SendMessage message = new SendMessage()
                         .setChatId(chat_id)
                         .setText(MenuUtil.QUIZ);
             }
- //TODO
+ //TODO make photo feature
 // ------------------------- ФОТО -----------------------------------
             else if (message_text.equals(MenuUtil.PHOTO)){
                 SendMessage message = new SendMessage()
@@ -193,7 +193,7 @@ public class Bot extends TelegramLongPollingBot {
                 break;
             }*/
 
-        //TODO
+        //TODO make work all calbback buttons from calendar
          else if (update.hasCallbackQuery()) {
             // Set variables
             String call_data = update.getCallbackQuery().getData();
@@ -275,5 +275,5 @@ public class Bot extends TelegramLongPollingBot {
 
         return txt;
     }
-
+  //TODO make db with user info (FASTA)
 }

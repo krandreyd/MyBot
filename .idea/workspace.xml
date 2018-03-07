@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="76f240e0-5297-439a-ae00-bec455a8721e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_telegram_telegrambotsextensions_3_6.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyBot.iml" afterPath="$PROJECT_DIR$/MyBot.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/bot/replyMenu/MenuUtil.java" afterPath="$PROJECT_DIR$/src/main/java/bot/replyMenu/MenuUtil.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/bot/Bot.java" afterPath="$PROJECT_DIR$/src/main/java/bot/Bot.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -88,8 +85,8 @@
       <file leaf-file-name="Bot.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/bot/Bot.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="96" column="57" lean-forward="true" selection-start-line="96" selection-start-column="57" selection-end-line="96" selection-end-column="57" />
+            <state relative-caret-position="696">
+              <caret line="277" column="39" lean-forward="false" selection-start-line="277" selection-start-column="39" selection-end-line="277" selection-end-column="39" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -195,11 +192,11 @@
         <option value="$PROJECT_DIR$/resources/bot/bot.properties" />
         <option value="$PROJECT_DIR$/resources/database/database.properties" />
         <option value="$PROJECT_DIR$/src/main/java/bot/calendar/CalendarUtil.java" />
-        <option value="$PROJECT_DIR$/src/main/java/bot/Bot.java" />
         <option value="$PROJECT_DIR$/config/database/database.properties" />
         <option value="$PROJECT_DIR$/config/bot/bot.properties" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/bot/replyMenu/MenuUtil.java" />
+        <option value="$PROJECT_DIR$/src/main/java/bot/Bot.java" />
       </list>
     </option>
   </component>
@@ -675,11 +672,18 @@
       <option name="project" value="LOCAL" />
       <updated>1520376870901</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="last else added">
+      <created>1520381230977</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1520381230977</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="79520000" />
+    <option name="totallyTimeSpent" value="79689000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1087,8 +1091,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/bot/Bot.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="96" column="57" lean-forward="true" selection-start-line="96" selection-start-column="57" selection-end-line="96" selection-end-column="57" />
+        <state relative-caret-position="696">
+          <caret line="277" column="39" lean-forward="false" selection-start-line="277" selection-start-column="39" selection-end-line="277" selection-end-column="39" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
